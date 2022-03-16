@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/WH_match_parent"
+    android:padding="16dp"
+    tools:context=".ui.fragment.DetailUserFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user_image_detail"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        style ="@style/WH_wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tv_name_githup_detail"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_image_detail"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_val_repository_githup_detail"
+            style="@style/TagDetailNum"
+            tools:text="7000" />
+
+        <TextView
+            android:id="@+id/tv_repository_githup_detail"
+            style="@style/TagDetail"
+            android:text="@string/text_repositories" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        style="@style/WH_wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/tv_val_follower_githup_detail"
+            style="@style/TagDetailNum"
+            tools:text="6000" />
+
+        <TextView
+            android:id="@+id/tv_follower_githup_detail"
+            style="@style/TagDetail"
+            android:text="@string/text_follower" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        style="@style/WH_wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_val_following_githup_detail"
+            style="@style/TagDetailNum"
+            tools:text="8000" />
+
+        <TextView
+            android:id="@+id/tv_following_githup_detail"
+            style="@style/TagDetail"
+            android:text="Following" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_name_githup_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/gray_300"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/iv_share"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_user_image_detail"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_image_detail"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_image_detail"
+        tools:text="Nama" />
+
+    <TextView
+        android:id="@+id/tv_company_githup_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_share"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_image_detail"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_githup_detail"
+        tools:text="Company" />
+
+    <TextView
+        android:id="@+id/tv_lokasi_githup_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_share"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_company_githup_detail"
+        app:layout_constraintTop_toBottomOf="@id/tv_company_githup_detail"
+        tools:text="Lokasi" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/gray_soft"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lokasi_githup_detail" />
+
+    <ImageView
+        android:id="@+id/iv_share"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_share"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lokasi_githup_detail"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="@+id/tv_name_githup_detail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

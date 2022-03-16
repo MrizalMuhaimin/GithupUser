@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">GithupUser</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_repositories">Repositories</string>
+    <string name="text_follower">Follower</string>
+    <style name="TagDetailNum" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/gray_500</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TagDetail" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="WH_wrap_content" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WH_match_parent" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+</resources>
