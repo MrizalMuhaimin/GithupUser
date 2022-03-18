@@ -8,5 +8,5 @@ import kotlinx.parcelize.Parcelize
 data class SearchResponse(
     val total_count: Int?,
     val incomplete_result: Boolean?,
-    val items: List<UserSearch>?,
+    val items: MutableList<UserSearch>?,
 ):Parcelable

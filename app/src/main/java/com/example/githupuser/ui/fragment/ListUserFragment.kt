@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githupuser.R
+import com.example.githupuser.data.model.UserDetail
+import com.example.githupuser.data.model.UserSearch
+import com.example.githupuser.data.model.response.SearchResponse
 import com.example.githupuser.databinding.FragmentListUserBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
-import com.example.githupuser.ui.model.UserModel
-import com.example.githupuser.ui.util.GithupUserList
 import com.example.githupuser.viewmodel.ListViewModel
 
 
@@ -34,21 +34,28 @@ class ListUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
+        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
+
 
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
-            val adapter = ListUserAdapter(GithupUserList.LIST_USER)
-            mViewBinding.rvListUser.adapter = adapter
 
-            adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
-                override fun onItemClicked(user: UserModel) {
-                    val intentToDetail = Intent(requireActivity(),DetailUserActivity::class.java)
-                    intentToDetail.putExtra(DetailUserActivity.TAG_DETAIL_USER, user)
-                    startActivity(intentToDetail)
-                }
+            mainViewModel.dataSearch.observe( viewLifecycleOwner,{
+                val adapter = ListUserAdapter(it.items)
+                mViewBinding.rvListUser.adapter = adapter
+
+                adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
+                    override fun onItemClicked(user: UserSearch) {
+                        val intentToDetail = Intent(requireActivity(),DetailUserActivity::class.java)
+                        intentToDetail.putExtra(DetailUserActivity.TAG_DETAIL_USER, user)
+                        startActivity(intentToDetail)
+                    }
+                })
+
             })
+
+
         }
     }
 
