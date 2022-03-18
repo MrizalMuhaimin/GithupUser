@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import com.example.githupuser.intent.ListUserActivity
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        Handler().postDelayed(
+        Handler(Looper.getMainLooper()).postDelayed(
             {
                 val intentToListUserActivity = Intent(this@MainActivity,ListUserActivity::class.java)
                 startActivity(intentToListUserActivity)
