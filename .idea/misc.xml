@@ -4,6 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lenovo/Downloads/202203122350536de5551bf897164b383398423e199eed/GithupUser/app/src/main/res/layout/fragment_detail__user_.xml" value="0.264" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/drawable/bg_home_search.xml" value="0.121" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/drawable/ic_all_arrow.xml" value="0.121" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/drawable/ic_all_search.xml" value="0.121" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/layout/activity_detail_user.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/layout/activity_list_user.xml" value="0.2" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/layout/fragment_item_list_user.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/lenovo/OneDrive - Institut Teknologi Bandung/Dev/GithupUser/app/src/main/res/layout/fragment_list_user.xml" value="0.12158054711246201" />
       </map>
     </option>
   </component>

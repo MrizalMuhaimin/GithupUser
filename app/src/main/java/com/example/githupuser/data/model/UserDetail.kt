@@ -1,0 +1,37 @@
+package com.example.githupuser.data.model
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class UserDetail(
+    val login: String?,
+    val id: Int?,
+    val node_id: String?,
+    val avatar_url: String?,
+    val gravatar_id: String?,
+    val url: String?,
+    val html_url: String?,
+    val followers_url: String?,
+    val following_url: String?,
+    val gists_url: String?,
+    val starred_url: String?,
+    val subscriptions_url: String?,
+    val organization_url: String?,
+    val repos_url: String?,
+    val events_url: String?,
+    val received_events_url: String?,
+    val type: String?,
+    val site_admin: String?,
+    val name: String?,
+    val company: String?,
+    val blog: String?,
+    val location: String?,
+    val email: String?,
+    val hireable: String?,
+    val bio: String?,
+    val twitter_username: String?,
+    val public_repos: Int?,
+    val public_gists: Int?
+):Parcelable
+
