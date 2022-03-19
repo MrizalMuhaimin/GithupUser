@@ -1,11 +1,16 @@
 package com.example.githupuser.ui.fragment
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,10 +39,12 @@ class ListUserFragment : Fragment() {
 
         val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
 
+
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
             mainViewModel.dataSearch.observe( viewLifecycleOwner,{
+
                 val adapter = ListUserAdapter(it.items)
                 mViewBinding.rvListUser.adapter = adapter
 

@@ -14,8 +14,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowViewModel: ViewModel() {
-    private val _dataFollow = MutableLiveData<MutableList<UserSearch>>()
-    val dataFollow: LiveData<MutableList<UserSearch>> = _dataFollow
+    private val _dataFollower = MutableLiveData<MutableList<UserSearch>>()
+    val dataFollower: LiveData<MutableList<UserSearch>> = _dataFollower
+
+    private val _dataFollowing = MutableLiveData<MutableList<UserSearch>>()
+    val dataFollowing: LiveData<MutableList<UserSearch>> = _dataFollowing
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -31,7 +34,7 @@ class FollowViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if(responseBody != null){
-                        _dataFollow.value = responseBody
+                        _dataFollower.value = responseBody
                     }
                 }else {
                     Log.e(ContentValues.TAG, "onFailure User 2: ${response.message()}")
@@ -57,7 +60,7 @@ class FollowViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if(responseBody != null){
-                        _dataFollow.value = responseBody
+                        _dataFollowing.value = responseBody
                     }
                 }else {
                     Log.e(ContentValues.TAG, "onFailure User 2: ${response.message()}")

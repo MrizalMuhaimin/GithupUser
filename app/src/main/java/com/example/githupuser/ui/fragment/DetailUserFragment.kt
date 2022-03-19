@@ -52,6 +52,7 @@ class DetailUserFragment : Fragment() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
 
         viewBinding.viewPager.adapter = sectionsPagerAdapter
+
         TabLayoutMediator(viewBinding.tabs, viewBinding.viewPager){ tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
             if(position==0){

@@ -1,5 +1,6 @@
 package com.example.githupuser.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githupuser.R
 import com.example.githupuser.databinding.FragmentFollowerBinding
 import com.example.githupuser.databinding.FragmentFollowingBinding
+import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.viewmodel.FollowViewModel
 
@@ -36,16 +38,17 @@ class FollowingFragment : Fragment() {
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
-            mainViewModel.dataFollow.observe( viewLifecycleOwner,{
+            mainViewModel.dataFollowing.observe( viewLifecycleOwner,{
                 val adapter = ListUserAdapter(it)
 
                 mViewBinding.rvListUser.adapter = adapter
 
                 adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
                     override fun onItemClicked(user: String?) {
-//                        val intentToDetail = Intent(requireActivity(), DetailUserActivity::class.java)
-//                        intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
-//                        startActivity(intentToDetail)
+                        activity?.finish()
+                        val intentToDetail = Intent(requireActivity(), DetailUserActivity::class.java)
+                        intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
+                        startActivity(intentToDetail)
                     }
                 })
 
