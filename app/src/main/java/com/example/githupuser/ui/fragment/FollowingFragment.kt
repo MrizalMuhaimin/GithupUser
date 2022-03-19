@@ -51,10 +51,7 @@ class FollowingFragment : Fragment() {
                         startActivity(intentToDetail)
                     }
                 })
-
             })
-
-
         }
     }
 }

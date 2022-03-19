@@ -47,10 +47,7 @@ class FollowerFragment : Fragment() {
                         startActivity(intentToDetail)
                     }
                 })
-
             })
-
-
         }
     }
 }

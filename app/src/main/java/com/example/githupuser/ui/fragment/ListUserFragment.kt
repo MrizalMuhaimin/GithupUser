@@ -39,7 +39,6 @@ class ListUserFragment : Fragment() {
 
         val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
 
-
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
@@ -55,10 +54,7 @@ class ListUserFragment : Fragment() {
                         startActivity(intentToDetail)
                     }
                 })
-
             })
-
-
         }
     }
 }

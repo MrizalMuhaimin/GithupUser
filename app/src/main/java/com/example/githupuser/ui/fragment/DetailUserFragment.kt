@@ -82,6 +82,7 @@ class DetailUserFragment : Fragment() {
             viewBinding.tvNameGithupDetail.text ="null"
         }
     }
+
     fun renderAllDetai (it: UserDetail, view: View){
         val context = view.context
         Glide.with(context)
@@ -113,8 +114,8 @@ class DetailUserFragment : Fragment() {
                 t.printStackTrace()
             }
         }
-
     }
+
     private fun showLoading(isLoading: Boolean) {
         viewBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
@@ -126,5 +127,4 @@ class DetailUserFragment : Fragment() {
             R.string.tab_text_2
         )
     }
-
 }
