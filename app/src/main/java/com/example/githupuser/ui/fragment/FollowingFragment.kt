@@ -1,6 +1,5 @@
 package com.example.githupuser.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,43 +8,44 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.databinding.FragmentListUserBinding
-import com.example.githupuser.intent.DetailUserActivity
+import com.example.githupuser.R
+import com.example.githupuser.databinding.FragmentFollowerBinding
+import com.example.githupuser.databinding.FragmentFollowingBinding
 import com.example.githupuser.ui.adapter.ListUserAdapter
-import com.example.githupuser.viewmodel.ListViewModel
+import com.example.githupuser.viewmodel.FollowViewModel
 
 
-class ListUserFragment : Fragment() {
-
-    private lateinit var mViewBinding: FragmentListUserBinding
+class FollowingFragment : Fragment() {
+    private lateinit var mViewBinding: FragmentFollowingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mViewBinding = FragmentListUserBinding.inflate(inflater, container, false)
+        mViewBinding = FragmentFollowingBinding.inflate(inflater, container, false)
         return mViewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
+        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+            FollowViewModel::class.java)
 
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
-            mainViewModel.dataSearch.observe( viewLifecycleOwner,{
-                val adapter = ListUserAdapter(it.items)
+            mainViewModel.dataFollow.observe( viewLifecycleOwner,{
+                val adapter = ListUserAdapter(it)
+
                 mViewBinding.rvListUser.adapter = adapter
 
                 adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
                     override fun onItemClicked(user: String?) {
-                        val intentToDetail = Intent(requireActivity(),DetailUserActivity::class.java)
-                        intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
-                        startActivity(intentToDetail)
+//                        val intentToDetail = Intent(requireActivity(), DetailUserActivity::class.java)
+//                        intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
+//                        startActivity(intentToDetail)
                     }
                 })
 

@@ -17,8 +17,7 @@ class DetailUserActivity : AppCompatActivity() {
         val mdetailUserFragment =  DetailUserFragment()
         val mbundle = Bundle()
 
-        title = detailUser.toString()
-
+        title = detailUser
         if (mbundle != null ) {
             mbundle.putString(TAG_LOGIN_USER,detailUser)
             mdetailUserFragment.arguments = mbundle

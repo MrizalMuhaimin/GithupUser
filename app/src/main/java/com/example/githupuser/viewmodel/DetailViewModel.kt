@@ -34,6 +34,7 @@ class DetailViewModel : ViewModel() {
                 }else {
                     Log.e(ContentValues.TAG, "onFailure User 2: ${response.message()}")
                 }
+                _isLoading.value = false
             }
 
             override fun onFailure(call: Call<UserDetail>, t: Throwable) {

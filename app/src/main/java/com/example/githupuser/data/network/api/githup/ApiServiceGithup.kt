@@ -22,12 +22,12 @@ interface ApiServiceGithup {
     @GET("users/{username}/followers")
     fun getFollowers(
         @Path("username") username: String
-    ):Call<List<UserSearch>>
+    ):Call<MutableList<UserSearch>>
 
     @GET("users/{username}/following")
     fun getFollowing(
         @Path("username") username: String
-    ):Call<List<UserSearch>>
+    ):Call<MutableList<UserSearch>>
 
 
 

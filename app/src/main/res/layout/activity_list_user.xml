@@ -94,15 +94,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="-83dp">
 
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_List_Container_View"
                     android:name="com.example.githupuser.ui.fragment.ListUserFragment"
                     android:layout_width="match_parent"
-                    android:clipToPadding="false"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false" />
             </androidx.core.widget.NestedScrollView>
 
             <ProgressBar
@@ -116,8 +118,4 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
