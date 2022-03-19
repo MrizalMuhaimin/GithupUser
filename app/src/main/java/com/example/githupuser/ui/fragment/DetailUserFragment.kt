@@ -9,10 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.githupuser.R
+import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.databinding.FragmentDetailUserBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.model.UserModel
+import com.example.githupuser.viewmodel.DetailViewModel
+import com.example.githupuser.viewmodel.ListViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -37,40 +42,52 @@ class DetailUserFragment : Fragment() {
 
         if(arguments != null){
 
-            val dataDetailUser = arguments?.getParcelable<UserModel>(DetailUserActivity.TAG_DETAIL_USER)
-            val imgInt = resources.getIdentifier(dataDetailUser?.avatar,"drawable",context.packageName )
-            viewBinding.ivUserImageDetail.setImageResource(imgInt)
-            viewBinding.tvNameGithupDetail.text = dataDetailUser?.name
-            viewBinding.tvCompanyGithupDetail.text = dataDetailUser?.company
-            viewBinding.tvLokasiGithupDetail.text = dataDetailUser?.location
-            viewBinding.tvValRepositoryGithupDetail.text = dataDetailUser?.repository.toString()
-            viewBinding.tvValFollowerGithupDetail.text = dataDetailUser?.follower.toString()
-            viewBinding.tvValFollowingGithupDetail.text = dataDetailUser?.following.toString()
+            val dataDetailUser = arguments?.getString(DetailUserActivity.TAG_LOGIN_USER)
+            val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+                DetailViewModel::class.java)
 
-            viewBinding.ivShare.setOnClickListener{
-                val message = "["+ dataDetailUser?.username+"]\n"+ dataDetailUser?.name + " work on " +dataDetailUser?.company +
-                        "\nRepositories: "+dataDetailUser?.repository.toString()+
-                        "\nFollower: "+dataDetailUser?.follower.toString()+
-                        "\nFollowing: " +dataDetailUser?.following.toString()
-                val intent = Intent()
-                intent.action = Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_TEXT,message)
-                intent.type = "text/plain"
+            mainViewModel.setDetailUser(dataDetailUser.toString())
 
-                try {
-                    startActivity(intent)
-                } catch (t: ActivityNotFoundException) {
-                    t.printStackTrace()
-                }
-
-            }
+            mainViewModel.dataUsers.observe(viewLifecycleOwner,{
+                renderAllDetai(it, view)
+            })
 
         }else{
             viewBinding.tvNameGithupDetail.text ="null"
         }
+    }
+    fun renderAllDetai (it: UserDetail, view: View){
+        val context = view.context
+        Glide.with(context)
+            .load(it.avatar_url)
+            .into(viewBinding.ivUserImageDetail)
 
+        viewBinding.tvNameGithupDetail.text = it.name?: "-"
+        viewBinding.tvCompanyGithupDetail.text = it.company?: "-"
+        viewBinding.tvLokasiGithupDetail.text = it.location?: "-"
+        viewBinding.tvValRepositoryGithupDetail.text = it.public_repos.toString()?: "-"
+        viewBinding.tvValFollowerGithupDetail.text = it.followers.toString()?: "-"
+        viewBinding.tvValFollowingGithupDetail.text = it.following.toString()?: "-"
+
+        viewBinding.ivShare.setOnClickListener{ itt ->
+            val message = "["+ it.login+"]\n"+ it.name + " work on " +it.company +
+                    "\nRepositories: "+it.public_repos.toString()+
+                    "\nFollower: "+it.followers.toString()+
+                    "\nFollowing: " +it.following.toString()+
+                    "\n" + it.repos_url
+
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,message)
+            intent.type = "text/plain"
+
+            try {
+                startActivity(intent)
+            } catch (t: ActivityNotFoundException) {
+                t.printStackTrace()
+            }
+        }
 
     }
-
 
 }

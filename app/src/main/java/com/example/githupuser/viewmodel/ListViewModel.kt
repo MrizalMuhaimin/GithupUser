@@ -17,9 +17,6 @@ class ListViewModel : ViewModel() {
     private val _dataSearch = MutableLiveData<SearchResponse>()
     val dataSearch : LiveData<SearchResponse> = _dataSearch
 
-    private val _dataUsers = MutableLiveData<MutableList<UserDetail>>()
-    val dataUsers: LiveData<MutableList<UserDetail>> = _dataUsers
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -54,29 +51,6 @@ class ListViewModel : ViewModel() {
         })
     }
 
-    fun setDetailUser(login: String){
-        val client = ApiConfigGithup.getApiService().getUser(login)
-        client.enqueue(object : Callback<UserDetail> {
-            override fun onResponse(
-                call: Call<UserDetail>,
-                response: Response<UserDetail>
-            ) {
 
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if(responseBody != null){
-                        _dataUsers.value?.add(responseBody)
-                    }
-                }else {
-                    Log.e(TAG, "onFailure User 2: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<UserDetail>, t: Throwable) {
-                _isLoading.value = false
-                Log.e(TAG, "onFailure User: ${t.message.toString()}")
-            }
-        })
-    }
 
 }

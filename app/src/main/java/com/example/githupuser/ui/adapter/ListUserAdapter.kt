@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githupuser.R
-import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.data.model.response.SearchResponse
 import com.example.githupuser.ui.adapter.viewholder.ListUserViewHolder
-import com.example.githupuser.ui.model.UserModel
 
 class ListUserAdapter(private val listUser: MutableList<UserSearch>?):
     RecyclerView.Adapter<ListUserViewHolder>() {
@@ -29,14 +26,14 @@ class ListUserAdapter(private val listUser: MutableList<UserSearch>?):
     override fun onBindViewHolder(holder: ListUserViewHolder, position: Int) {
         holder.onBind(listUser!![position])
         holder.itemView.setOnClickListener{
-            holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.adapterPosition]) }
+            holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.adapterPosition].login) }
         }
     }
 
     override fun getItemCount(): Int = listUser!!.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(user: UserSearch)
+        fun onItemClicked(user: String?)
     }
 
 

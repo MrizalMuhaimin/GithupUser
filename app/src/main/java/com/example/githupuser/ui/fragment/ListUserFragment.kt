@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.data.model.response.SearchResponse
 import com.example.githupuser.databinding.FragmentListUserBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
@@ -36,7 +34,6 @@ class ListUserFragment : Fragment() {
 
         val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
 
-
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
@@ -46,9 +43,9 @@ class ListUserFragment : Fragment() {
                 mViewBinding.rvListUser.adapter = adapter
 
                 adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
-                    override fun onItemClicked(user: UserSearch) {
+                    override fun onItemClicked(user: String?) {
                         val intentToDetail = Intent(requireActivity(),DetailUserActivity::class.java)
-                        intentToDetail.putExtra(DetailUserActivity.TAG_DETAIL_USER, user)
+                        intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
                         startActivity(intentToDetail)
                     }
                 })

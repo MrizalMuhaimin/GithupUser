@@ -8,22 +8,19 @@ import com.example.githupuser.ui.model.UserModel
 
 class DetailUserActivity : AppCompatActivity() {
 
-    companion object {
-        const val TAG_DETAIL_USER ="TAG_DETAIL_USER"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
 
-        val detailUser = intent.getParcelableExtra<UserModel>(TAG_DETAIL_USER) as UserModel
+        val detailUser = intent.getStringExtra(TAG_LOGIN_USER)
         val mFragmenManager = supportFragmentManager
         val mdetailUserFragment =  DetailUserFragment()
         val mbundle = Bundle()
 
-        setTitle(detailUser.username)
+        title = detailUser.toString()
+
         if (mbundle != null ) {
-            mbundle.putParcelable(TAG_DETAIL_USER,detailUser)
+            mbundle.putString(TAG_LOGIN_USER,detailUser)
             mdetailUserFragment.arguments = mbundle
         }
 
@@ -34,5 +31,9 @@ class DetailUserActivity : AppCompatActivity() {
                 .add(R.id.fragment_detail_container,mdetailUserFragment,DetailUserFragment::class.java.simpleName)
                 .commit()
         }
+    }
+
+    companion object {
+        const val TAG_LOGIN_USER ="TAG_LOGIN_USER"
     }
 }
