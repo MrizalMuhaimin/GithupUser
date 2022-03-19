@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.githupuser.R
 import com.example.githupuser.ui.fragment.DetailUserFragment
-import com.example.githupuser.ui.model.UserModel
 
 class DetailUserActivity : AppCompatActivity() {
 

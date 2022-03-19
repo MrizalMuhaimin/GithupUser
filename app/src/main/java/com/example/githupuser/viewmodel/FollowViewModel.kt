@@ -5,9 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.data.model.response.SearchResponse
 import com.example.githupuser.data.network.api.githup.ApiConfigGithup
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,7 +47,7 @@ class FollowViewModel: ViewModel() {
         })
     }
 
-    fun setDataFollowering(login: String){
+    fun setDataFollowing(login: String){
         val client = ApiConfigGithup.getApiService().getFollowing(login)
         client.enqueue(object : Callback<MutableList<UserSearch>> {
             override fun onResponse(

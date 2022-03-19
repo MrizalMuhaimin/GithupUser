@@ -7,23 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.githupuser.R
 import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.databinding.FragmentDetailUserBinding
 import com.example.githupuser.intent.DetailUserActivity
-import com.example.githupuser.ui.model.UserModel
 import com.example.githupuser.ui.pageradapter.SectionsPagerAdapter
 import com.example.githupuser.viewmodel.DetailViewModel
 import com.example.githupuser.viewmodel.FollowViewModel
-import com.example.githupuser.viewmodel.ListViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class DetailUserFragment : Fragment() {
@@ -59,7 +53,7 @@ class DetailUserFragment : Fragment() {
                 folloViewModel.setDataFollower(dataDetailUser.toString())
 
             }else if(position==1){
-                folloViewModel.setDataFollowering(dataDetailUser.toString())
+                folloViewModel.setDataFollowing(dataDetailUser.toString())
             }
 
             folloViewModel.isLoading.observe(viewLifecycleOwner,{

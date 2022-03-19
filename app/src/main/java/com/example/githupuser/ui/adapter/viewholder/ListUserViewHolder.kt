@@ -2,16 +2,10 @@ package com.example.githupuser.ui.adapter.viewholder
 
 import android.view.View
 import android.widget.TextView
-import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githupuser.R
-import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.data.model.response.SearchResponse
-import com.example.githupuser.ui.model.UserModel
-import com.example.githupuser.viewmodel.ListViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ListUserViewHolder(view: View):RecyclerView.ViewHolder(view) {

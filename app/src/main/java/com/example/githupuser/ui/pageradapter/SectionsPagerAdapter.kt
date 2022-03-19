@@ -1,6 +1,5 @@
 package com.example.githupuser.ui.pageradapter
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.githupuser.ui.fragment.FollowerFragment

@@ -1,6 +1,5 @@
 package com.example.githupuser.data.network.setting
 
-import com.example.githupuser.data.util.ACCES_TOKEN
 import okhttp3.Interceptor
 import okhttp3.Response
 

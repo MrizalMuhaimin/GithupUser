@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
-
-import com.example.githupuser.R
 import com.example.githupuser.databinding.ActivityListUserBinding
-import com.example.githupuser.ui.fragment.ListUserFragment
 import com.example.githupuser.viewmodel.ListViewModel
 
 class ListUserActivity : AppCompatActivity() {

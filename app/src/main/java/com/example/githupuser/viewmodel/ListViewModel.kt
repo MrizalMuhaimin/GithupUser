@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.data.model.response.SearchResponse
 import com.example.githupuser.data.network.api.githup.ApiConfigGithup
 import retrofit2.Call
