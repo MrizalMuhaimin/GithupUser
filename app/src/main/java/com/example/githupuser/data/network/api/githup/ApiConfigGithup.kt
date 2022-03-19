@@ -1,6 +1,6 @@
 package com.example.githupuser.data.network.api.githup
 
-import com.example.githupuser.BuildConfig
+
 import com.example.githupuser.data.network.setting.BasicInterceptorGithup
 import com.example.githupuser.data.util.ACCES_TOKEN
 import com.example.githupuser.data.util.BASE_URL
