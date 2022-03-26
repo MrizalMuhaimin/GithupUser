@@ -14,6 +14,7 @@ import com.example.githupuser.databinding.FragmentListUserBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.viewmodel.ListViewModel
+import com.example.githupuser.viewmodel.TitleActivityModel
 
 
 class ListUserFragment : Fragment() {
@@ -32,7 +33,13 @@ class ListUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(ListViewModel::class.java)
+        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+            ListViewModel::class.java)
+
+        val titleViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+            TitleActivityModel::class.java)
+
+        titleViewModel.updateActionBarTitle("GithupUser")
 
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)

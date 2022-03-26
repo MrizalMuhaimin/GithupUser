@@ -95,7 +95,7 @@ class DetailUserFragment : Fragment() {
                     "\nRepositories: "+it.public_repos.toString()+
                     "\nFollower: "+it.followers.toString()+
                     "\nFollowing: " +it.following.toString()+
-                    "\n" + it.repos_url
+                    "\n" + it.html_url
 
             val intent = Intent()
             intent.action = Intent.ACTION_SEND

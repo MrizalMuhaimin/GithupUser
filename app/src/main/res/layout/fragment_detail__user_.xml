@@ -99,7 +99,7 @@
                 android:textColor="@color/gray_300"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/iv_share"
+                app:layout_constraintEnd_toStartOf="@+id/iv_favorite"
                 app:layout_constraintHorizontal_bias="0.812"
                 app:layout_constraintLeft_toLeftOf="@+id/iv_user_image_detail"
                 app:layout_constraintRight_toRightOf="parent"
@@ -114,7 +114,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/iv_share"
+                app:layout_constraintEnd_toStartOf="@+id/iv_favorite"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/iv_user_image_detail"
@@ -128,7 +128,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toStartOf="@+id/iv_share"
+                app:layout_constraintEnd_toEndOf="@+id/tv_company_githup_detail"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_company_githup_detail"
@@ -145,6 +145,17 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_lokasi_githup_detail" />
+
+            <ImageView
+                android:id="@+id/iv_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_lokasi_githup_detail"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="@+id/tv_name_githup_detail" />
 
             <ImageView
                 android:id="@+id/iv_share"

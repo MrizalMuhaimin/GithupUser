@@ -9,6 +9,8 @@
     <string name="tab_text_2">following</string>
     <string name="user">User</string>
     <string name="not_found">Not Found</string>
+    <string name="title_home">GithupUser</string>
+    <string name="favorite">Favorite</string>
 
     <style name="TagDetailNum" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">wrap_content</item>
