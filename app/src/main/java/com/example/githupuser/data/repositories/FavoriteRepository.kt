@@ -16,9 +16,9 @@ class FavoriteRepository(application: Application) {
         mNotesDao = db.favoriteDao()
     }
 
-    fun getAllFavorite(): LiveData<List<UserEntity>> = mNotesDao.getAllFavorite()
+    fun getAllFavorite() = mNotesDao.getAllFavorite()
 
-    fun getUserbyLogin(login:String):LiveData<List<UserEntity>> = mNotesDao.getUserbyLogin(login)
+    fun getUserbyLogin(login:String) = mNotesDao.getUserbyLogin(login)
 
     fun insert(user: UserEntity) {
         executorService.execute { mNotesDao.insert(user) }

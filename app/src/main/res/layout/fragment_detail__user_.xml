@@ -112,7 +112,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/iv_favorite"
                 app:layout_constraintLeft_toLeftOf="parent"

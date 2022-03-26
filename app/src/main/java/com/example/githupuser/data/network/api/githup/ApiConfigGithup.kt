@@ -16,7 +16,7 @@ class ApiConfigGithup {
 
         fun getApiService():ApiServiceGithup {
             val client = OkHttpClient.Builder()
-//                .addInterceptor(BasicInterceptorGithup(ACCES_TOKEN))
+                .addInterceptor(BasicInterceptorGithup(ACCES_TOKEN))
                 .addInterceptor(logger)
                 .connectTimeout(30,TimeUnit.SECONDS)
                 .build()

@@ -22,7 +22,7 @@ data class UserDetail(
     val events_url: String?,
     val received_events_url: String?,
     val type: String?,
-    val site_admin: String?,
+    val site_admin: Boolean?,
     val name: String?,
     val company: String?,
     val blog: String?,

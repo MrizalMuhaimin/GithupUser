@@ -15,9 +15,9 @@ interface UserDao {
     @Delete
     fun delete(note: UserEntity)
 
-    @Query("SELECT * from UserEntity ORDER BY id ASC")
+    @Query("SELECT * from users_favorite ORDER BY id ASC")
     fun getAllFavorite(): LiveData<List<UserEntity>>
 
-    @Query("SELECT * from UserEntity WHERE login = :login")
+    @Query("SELECT * from users_favorite WHERE login = :login")
     fun getUserbyLogin(login:String): LiveData<List<UserEntity>>
 }

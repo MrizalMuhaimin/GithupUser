@@ -1,19 +1,27 @@
 package com.example.githupuser.ui.fragment
 
+import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.githupuser.R
+import com.example.githupuser.data.db.entities.UserEntity
 import com.example.githupuser.data.model.UserDetail
 import com.example.githupuser.databinding.FragmentDetailUserBinding
 import com.example.githupuser.intent.DetailUserActivity
+import com.example.githupuser.ui.factory.FavoriteModelFactory
+import com.example.githupuser.ui.insert.FavoriteAddUpdateViewModel
+import com.example.githupuser.ui.main.FavoriteViewModel
 import com.example.githupuser.ui.pageradapter.SectionsPagerAdapter
 import com.example.githupuser.viewmodel.DetailViewModel
 import com.example.githupuser.viewmodel.FollowViewModel
@@ -23,6 +31,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DetailUserFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentDetailUserBinding
+    private lateinit var mainViewModel : DetailViewModel
+    private var userEntity: UserEntity? = null
+    private lateinit var mFavoriteAddUpdateViewModel : FavoriteAddUpdateViewModel
+    private lateinit var mFavoriteViewModel:  FavoriteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +52,22 @@ class DetailUserFragment : Fragment() {
 
         val dataDetailUser = arguments?.getString(DetailUserActivity.TAG_LOGIN_USER)
 
-        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
-        val folloViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(FollowViewModel::class.java)
 
+        mFavoriteAddUpdateViewModel = obtainFavoriteAddUpdateViewModel(requireActivity() as AppCompatActivity)
+        mFavoriteViewModel = obtainFavoriteViewModel(requireActivity() as AppCompatActivity)
+
+        mFavoriteViewModel.getUserByLogin(dataDetailUser.toString()).observe(viewLifecycleOwner, {
+            if(it.size !=0){
+                userEntity = it.get(0)
+
+            }else{
+                userEntity = null
+            }
+            checkIsFavorite(view)
+        })
+
+        mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
+        val folloViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(FollowViewModel::class.java)
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
 
         viewBinding.viewPager.adapter = sectionsPagerAdapter
@@ -74,6 +99,17 @@ class DetailUserFragment : Fragment() {
 
         }else{
             viewBinding.tvNameGithupDetail.text ="null"
+        }
+
+        viewBinding.ivFavorite.setOnClickListener{
+            if (userEntity != null) {
+                // Delete from favorite user
+                deleteFavorite()
+            } else {
+                // Add to favorite user
+                addFavorite()
+            }
+
         }
     }
 
@@ -110,8 +146,83 @@ class DetailUserFragment : Fragment() {
         }
     }
 
+    private fun obtainFavoriteAddUpdateViewModel(activity: AppCompatActivity): FavoriteAddUpdateViewModel {
+        val factory = FavoriteModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(FavoriteAddUpdateViewModel::class.java)
+    }
+
+    private fun obtainFavoriteViewModel(activity: AppCompatActivity): FavoriteViewModel {
+        val factory = FavoriteModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
+    }
+
     private fun showLoading(isLoading: Boolean) {
         viewBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun checkIsFavorite(view: View) {
+        val context = view.context
+
+        if(userEntity != null){
+            val imgInt = resources.getIdentifier("@drawable/ic_baseline_favorite_24","drawable",context.packageName )
+            viewBinding.ivFavorite.setImageResource(imgInt)
+            viewBinding.ivFavorite.setColorFilter(Color.parseColor("#FF0000"))
+        }else{
+            val imgInt = resources.getIdentifier("@drawable/ic_baseline_favorite_border_24","drawable",context.packageName )
+            viewBinding.ivFavorite.setImageResource(imgInt)
+            viewBinding.ivFavorite.setColorFilter(Color.parseColor("#4c566a"))
+
+        }
+    }
+
+
+
+    private fun addFavorite(){
+        mainViewModel.dataUsers.observe(viewLifecycleOwner) {
+            val user = UserEntity(
+                it.id,
+                it.login,
+                it.node_id,
+                it.avatar_url,
+                it.gravatar_id,
+                it.url,
+                it.html_url,
+                it.followers_url,
+                it.following_url,
+                it.gists_url,
+                it.starred_url,
+                it.subscriptions_url,
+                it.organization_url,
+                it.repos_url,
+                it.events_url,
+                it.received_events_url,
+                it.type,
+                it.site_admin,
+                it.name,
+                it.company,
+                it.blog,
+                it.location,
+                it.email,
+                it.hireable,
+                it.bio,
+                it.twitter_username,
+                it.public_repos,
+                it.public_gists,
+                it.followers,
+                it.following,
+                it.created_at,
+                it.updated_at,
+            )
+            userEntity = user
+            mFavoriteAddUpdateViewModel.insert(userEntity!!)
+        }
+    }
+
+    private fun deleteFavorite(){
+        mFavoriteAddUpdateViewModel.delete(userEntity!!)
+        userEntity = null
+
+
     }
 
     companion object {
