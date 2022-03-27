@@ -136,6 +136,30 @@
                 app:layout_constraintBottom_toTopOf="@+id/nav_view"
                 app:layout_constraintTop_toBottomOf="@+id/appBarLayout_list">
 
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nestedScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    app:layout_anchorGravity="center"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+                    <fragment
+                        android:id="@+id/nav_host_fragment_list"
+                        android:name="androidx.navigation.fragment.NavHostFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="112dp"
+                        android:layout_marginBottom="56dp"
+                        app:defaultNavHost="true"
+                        app:layout_constraintBottom_toTopOf="@id/nav_view"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:navGraph="@navigation/mobile_navigation" />
+
+                </androidx.core.widget.NestedScrollView>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -199,31 +223,5 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_anchor="@+id/constraintLayout"
-            app:layout_anchorGravity="center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-            <fragment
-                android:id="@+id/nav_host_fragment_list"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="112dp"
-                android:layout_marginBottom="56dp"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@id/nav_view"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navGraph="@navigation/mobile_navigation" />
-
-        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
