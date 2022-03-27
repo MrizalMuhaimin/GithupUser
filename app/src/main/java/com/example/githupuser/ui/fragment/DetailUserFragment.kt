@@ -1,6 +1,5 @@
 package com.example.githupuser.ui.fragment
 
-import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
@@ -11,7 +10,6 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.githupuser.R
@@ -59,11 +57,13 @@ class DetailUserFragment : Fragment() {
         mFavoriteViewModel.getUserByLogin(dataDetailUser.toString()).observe(viewLifecycleOwner, {
             if(it.size !=0){
                 userEntity = it.get(0)
+                renderOffline(view)
 
             }else{
                 userEntity = null
             }
             checkIsFavorite(view)
+
         })
 
         mainViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
@@ -87,18 +87,21 @@ class DetailUserFragment : Fragment() {
 
         }.attach()
 
-        if(arguments != null){
-            mainViewModel.setDetailUser(dataDetailUser.toString())
-            mainViewModel.isLoading.observe(viewLifecycleOwner, {
-                showLoading(it)
-            })
+        if(userEntity==null){
+            if(arguments != null){
+                mainViewModel.setDetailUser(dataDetailUser.toString())
+                mainViewModel.isLoading.observe(viewLifecycleOwner, {
+                    showLoading(it)
+                })
 
-            mainViewModel.dataUsers.observe(viewLifecycleOwner,{
-                renderAllDetai(it, view)
-            })
+                mainViewModel.dataUsers.observe(viewLifecycleOwner,{
+                    renderAllDetai(it, view)
+                })
 
-        }else{
-            viewBinding.tvNameGithupDetail.text ="null"
+            }else{
+                viewBinding.tvNameGithupDetail.text ="null"
+            }
+
         }
 
         viewBinding.ivFavorite.setOnClickListener{
@@ -114,11 +117,6 @@ class DetailUserFragment : Fragment() {
     }
 
     fun renderAllDetai (it: UserDetail, view: View){
-        val context = view.context
-        Glide.with(context)
-            .load(it.avatar_url)
-            .into(viewBinding.ivUserImageDetail)
-
         viewBinding.tvNameGithupDetail.text = it.name?: "-"
         viewBinding.tvCompanyGithupDetail.text = it.company?: "-"
         viewBinding.tvLokasiGithupDetail.text = it.location?: "-"
@@ -144,6 +142,51 @@ class DetailUserFragment : Fragment() {
                 t.printStackTrace()
             }
         }
+
+        val context = view.context
+        Glide.with(context)
+            .load(it.avatar_url)
+            .into(viewBinding.ivUserImageDetail)
+    }
+
+    private fun renderOffline(view: View){
+        val userDetai = UserDetail(
+            userEntity!!.login,
+            userEntity!!.id,
+            userEntity!!.node_id,
+            userEntity!!.avatar_url,
+            userEntity!!.gravatar_id,
+            userEntity!!.url,
+            userEntity!!.html_url,
+            userEntity!!.followers_url,
+            userEntity!!.following_url,
+            userEntity!!.gists_url,
+            userEntity!!.starred_url,
+            userEntity!!.subscriptions_url,
+            userEntity!!.organization_url,
+            userEntity!!.repos_url,
+            userEntity!!.events_url,
+            userEntity!!.received_events_url,
+            userEntity!!.type,
+            userEntity!!.site_admin,
+            userEntity!!.name,
+            userEntity!!.company,
+            userEntity!!.blog,
+            userEntity!!.location,
+            userEntity!!.email,
+            userEntity!!.hireable,
+            userEntity!!.bio,
+            userEntity!!.twitter_username,
+            userEntity!!.public_repos,
+            userEntity!!.public_gists,
+            userEntity!!.followers,
+            userEntity!!.following,
+            userEntity!!.created_at,
+            userEntity!!.updated_at,
+        )
+        renderAllDetai(userDetai,view)
+        viewBinding.tvNameGithupDetail.text = "userEntity!!.name"
+
     }
 
     private fun obtainFavoriteAddUpdateViewModel(activity: AppCompatActivity): FavoriteAddUpdateViewModel {
@@ -174,7 +217,6 @@ class DetailUserFragment : Fragment() {
 
         }
     }
-
 
 
     private fun addFavorite(){

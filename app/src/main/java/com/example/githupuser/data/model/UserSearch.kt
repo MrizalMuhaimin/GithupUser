@@ -21,7 +21,7 @@ data class UserSearch(
     val repos_url: String?,
     val events_url: String?,
     val received_events_url: String?,
-    val type: String,
+    val type: String?,
     val site_admin: Boolean?,
     val score: Int?
 ):Parcelable

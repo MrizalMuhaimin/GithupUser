@@ -1,6 +1,8 @@
 package com.example.githupuser.intent
 
 
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +14,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.githupuser.R
 import com.example.githupuser.databinding.ActivityListUserBinding
+import com.example.githupuser.ui.factory.FavoriteModelFactory
+import com.example.githupuser.ui.main.FavoriteViewModel
 import com.example.githupuser.viewmodel.ListViewModel
 import com.example.githupuser.viewmodel.TitleActivityModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,7 +34,6 @@ class ListUserActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_list)
 
-
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home, R.id.navigation_favorite
         ).build()
@@ -38,6 +41,10 @@ class ListUserActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        binding.ivSetting.setOnClickListener{
+            val intentToSetting = Intent(this@ListUserActivity,SettingActivity::class.java)
+            startActivity(intentToSetting)
+        }
 
         binding.homeEtSearch.setOnEditorActionListener{ _, actionId, _ ->
             var handled = false
@@ -70,7 +77,6 @@ class ListUserActivity : AppCompatActivity() {
                 binding.clNotFound.visibility = View.GONE
             }
         })
-
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -85,6 +91,10 @@ class ListUserActivity : AppCompatActivity() {
                 showLoading(it)
             })
         }
+    }
 
+    private fun obtainFavoriteViewModel(activity: AppCompatActivity): FavoriteViewModel {
+        val factory = FavoriteModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
     }
 }

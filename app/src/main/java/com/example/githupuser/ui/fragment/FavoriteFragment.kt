@@ -11,15 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.githupuser.R
 import com.example.githupuser.data.model.UserSearch
+import com.example.githupuser.databinding.ActivityListUserBinding
 import com.example.githupuser.databinding.FragmentFavoriteBinding
-import com.example.githupuser.databinding.FragmentListUserBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.ui.factory.FavoriteModelFactory
 import com.example.githupuser.ui.main.FavoriteViewModel
-import com.example.githupuser.viewmodel.ListViewModel
 import com.example.githupuser.viewmodel.TitleActivityModel
 
 
@@ -27,6 +25,7 @@ class FavoriteFragment : Fragment() {
 
     private lateinit var mFavoriteViewModel: FavoriteViewModel
     private lateinit var mViewBinding: FragmentFavoriteBinding
+    private lateinit var mActivityBinding: ActivityListUserBinding
 
 
     override fun onCreateView(
@@ -47,23 +46,40 @@ class FavoriteFragment : Fragment() {
 
         mFavoriteViewModel = obtainFavoriteViewModel(requireActivity() as AppCompatActivity)
 
+
         titleViewModel.updateActionBarTitle("Favorite")
+
 
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)
 
-            mFavoriteViewModel.getAllFavorite().observe( viewLifecycleOwner,{
+            mFavoriteViewModel.getAllFavorite().observe( viewLifecycleOwner) {
                 var listUserSearch: MutableList<UserSearch> = mutableListOf()
 
                 it.forEach { unit ->
-                    val userSearch = unit.type?.let { it1 ->
+                    val userSearch =
                         UserSearch(
-                            unit.login,unit.id,unit.node_id,unit.avatar_url,
-                            unit.gravatar_id,unit.url,unit.html_url,unit.followers_url,unit.following_url,
-                            unit.gists_url,unit.starred_url,unit.subscriptions_url,unit.repos_url,
-                            unit.repos_url,unit.events_url, unit.received_events_url, unit.type, unit.site_admin,0
+                            unit.login,
+                            unit.id,
+                            unit.node_id,
+                            unit.avatar_url,
+                            unit.gravatar_id,
+                            unit.url,
+                            unit.html_url,
+                            unit.followers_url,
+                            unit.following_url,
+                            unit.gists_url,
+                            unit.starred_url,
+                            unit.subscriptions_url,
+                            unit.repos_url,
+                            unit.repos_url,
+                            unit.events_url,
+                            unit.received_events_url,
+                            unit.type,
+                            unit.site_admin,
+                            0
                         )
-                    }
+
                     if (userSearch != null) {
                         listUserSearch.add(userSearch)
                     }
@@ -74,14 +90,15 @@ class FavoriteFragment : Fragment() {
                 val adapter = ListUserAdapter(listUserSearch)
                 mViewBinding.rvListUser.adapter = adapter
 
-                adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback{
+                adapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
                     override fun onItemClicked(user: String?) {
-                        val intentToDetail = Intent(requireActivity(), DetailUserActivity::class.java)
+                        val intentToDetail =
+                            Intent(requireActivity(), DetailUserActivity::class.java)
                         intentToDetail.putExtra(DetailUserActivity.TAG_LOGIN_USER, user)
                         startActivity(intentToDetail)
                     }
                 })
-            })
+            }
         }
 
     }
