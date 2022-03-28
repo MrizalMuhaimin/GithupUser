@@ -15,14 +15,15 @@ import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.viewmodel.FollowViewModel
 
 class FollowerFragment : Fragment() {
-    private lateinit var ViewBinding: FragmentFollowerBinding
+    private  var _ViewBinding: FragmentFollowerBinding ? = null
+    private  val ViewBinding get() =  _ViewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        ViewBinding = FragmentFollowerBinding.inflate(inflater, container, false)
+        _ViewBinding = FragmentFollowerBinding.inflate(inflater, container, false)
         return ViewBinding.root
     }
 
@@ -50,4 +51,9 @@ class FollowerFragment : Fragment() {
             })
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _ViewBinding = null
+    }
+
 }

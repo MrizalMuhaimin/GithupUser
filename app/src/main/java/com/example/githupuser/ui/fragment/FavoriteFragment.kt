@@ -12,28 +12,27 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githupuser.data.model.UserSearch
-import com.example.githupuser.databinding.ActivityListUserBinding
 import com.example.githupuser.databinding.FragmentFavoriteBinding
 import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.ui.factory.FavoriteModelFactory
 import com.example.githupuser.ui.main.FavoriteViewModel
 import com.example.githupuser.viewmodel.TitleActivityModel
+import com.example.githupuser.viewmodel.IsVisibilitySearchBar
 
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var mFavoriteViewModel: FavoriteViewModel
-    private lateinit var mViewBinding: FragmentFavoriteBinding
-    private lateinit var mActivityBinding: ActivityListUserBinding
-
+    private var _mViewBinding: FragmentFavoriteBinding ? = null
+    private val mViewBinding get() = _mViewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mViewBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        _mViewBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return mViewBinding.root
 
     }
@@ -44,10 +43,14 @@ class FavoriteFragment : Fragment() {
         val titleViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
             TitleActivityModel::class.java)
 
+        val visibilitySearchBar = ViewModelProvider(requireActivity(),ViewModelProvider.NewInstanceFactory()).get(
+            IsVisibilitySearchBar::class.java)
+
         mFavoriteViewModel = obtainFavoriteViewModel(requireActivity() as AppCompatActivity)
 
 
         titleViewModel.updateActionBarTitle("Favorite")
+        visibilitySearchBar.setFalse()
 
 
         context?.let{
@@ -101,6 +104,11 @@ class FavoriteFragment : Fragment() {
             }
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _mViewBinding = null
     }
     private fun obtainFavoriteViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = FavoriteModelFactory.getInstance(activity.application)

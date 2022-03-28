@@ -18,14 +18,14 @@ import com.example.githupuser.viewmodel.FollowViewModel
 
 
 class FollowingFragment : Fragment() {
-    private lateinit var mViewBinding: FragmentFollowingBinding
-
+    private var _mViewBinding: FragmentFollowingBinding ? = null
+    private val mViewBinding get() = _mViewBinding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mViewBinding = FragmentFollowingBinding.inflate(inflater, container, false)
+        _mViewBinding = FragmentFollowingBinding.inflate(inflater, container, false)
         return mViewBinding.root
     }
 
@@ -53,5 +53,9 @@ class FollowingFragment : Fragment() {
                 })
             })
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _mViewBinding = null
     }
 }

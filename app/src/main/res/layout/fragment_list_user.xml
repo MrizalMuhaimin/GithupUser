@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rv_list_user"
     style="@style/WH_match_parent"
+    app:launchSingleTop="true"
+    app:popUpToInclusive="true"
+    android:layout_marginTop="56dp"
     tools:context=".ui.fragment.ListUserFragment">
 
 </androidx.recyclerview.widget.RecyclerView>

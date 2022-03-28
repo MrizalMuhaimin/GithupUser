@@ -1,13 +1,12 @@
 package com.example.githupuser
 
-import android.app.Activity
+
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -32,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         val pref = SettingPreferences.getInstance(dataStore)
 
+//        val timeDelay = 3000
+
 
         val viewModel = ViewModelProvider(this, ThemeViewModelFactory(pref)).get(
             ThemeViewModel::class.java
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 val intentToListUserActivity = Intent(this@MainActivity,ListUserActivity::class.java)
                 startActivity(intentToListUserActivity)
                 finish()
-            },3000
+            }, 3000
         )
 
     }

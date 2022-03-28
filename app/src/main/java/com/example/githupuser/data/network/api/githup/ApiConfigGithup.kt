@@ -1,6 +1,7 @@
 package com.example.githupuser.data.network.api.githup
 
 
+import com.example.githupuser.BuildConfig
 import com.example.githupuser.data.network.setting.BasicInterceptorGithup
 import com.example.githupuser.data.util.ACCES_TOKEN
 import com.example.githupuser.data.util.BASE_URL
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiConfigGithup {
     companion object{
-        private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        private val logger = if(BuildConfig.DEBUG) { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }else { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE) }
 
         fun getApiService():ApiServiceGithup {
             val client = OkHttpClient.Builder()

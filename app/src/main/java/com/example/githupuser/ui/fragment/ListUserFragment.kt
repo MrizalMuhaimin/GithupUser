@@ -15,6 +15,7 @@ import com.example.githupuser.intent.DetailUserActivity
 import com.example.githupuser.ui.adapter.ListUserAdapter
 import com.example.githupuser.viewmodel.ListViewModel
 import com.example.githupuser.viewmodel.TitleActivityModel
+import com.example.githupuser.viewmodel.IsVisibilitySearchBar
 
 
 class ListUserFragment : Fragment() {
@@ -39,7 +40,11 @@ class ListUserFragment : Fragment() {
         val titleViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
             TitleActivityModel::class.java)
 
+        val visibilitySearchBar = ViewModelProvider(requireActivity(),ViewModelProvider.NewInstanceFactory()).get(
+            IsVisibilitySearchBar::class.java)
+
         titleViewModel.updateActionBarTitle("GithupUser")
+        visibilitySearchBar.setTrue()
 
         context?.let{
             mViewBinding.rvListUser.layoutManager = LinearLayoutManager(it, RecyclerView.VERTICAL, false)

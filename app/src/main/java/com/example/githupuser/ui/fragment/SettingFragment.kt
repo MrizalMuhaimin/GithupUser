@@ -23,7 +23,8 @@ import com.example.githupuser.viewmodel.ThemeViewModel
 
 class SettingFragment() : Fragment() {
 
-    private lateinit var viewBinding: FragmentSettingBinding
+    private var _viewBinding: FragmentSettingBinding ? =null
+    private val viewBinding get() = _viewBinding!!
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 
@@ -33,7 +34,7 @@ class SettingFragment() : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        viewBinding = FragmentSettingBinding.inflate(inflater,container,false)
+        _viewBinding = FragmentSettingBinding.inflate(inflater,container,false)
 
         return viewBinding.root
 
@@ -67,8 +68,6 @@ class SettingFragment() : Fragment() {
 
         viewBinding.settingBtnBack.setOnClickListener {
             activity?.finish()
-            val intentToListUserActivity = Intent(requireActivity(), ListUserActivity::class.java)
-            startActivity(intentToListUserActivity)
         }
 
         viewBinding.settingSwitchTheme.setOnCheckedChangeListener{_, isChaked ->
@@ -76,6 +75,10 @@ class SettingFragment() : Fragment() {
         }
 
 
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
     }
 
 }

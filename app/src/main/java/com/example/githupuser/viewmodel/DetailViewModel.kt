@@ -29,7 +29,7 @@ class DetailViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if(responseBody != null){
-                        _dataUsers.value = responseBody
+                        _dataUsers.value = responseBody!!
                     }
                 }else {
                     Log.e(ContentValues.TAG, "onFailure User 2: ${response.message()}")

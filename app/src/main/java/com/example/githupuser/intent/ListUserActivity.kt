@@ -18,6 +18,7 @@ import com.example.githupuser.ui.factory.FavoriteModelFactory
 import com.example.githupuser.ui.main.FavoriteViewModel
 import com.example.githupuser.viewmodel.ListViewModel
 import com.example.githupuser.viewmodel.TitleActivityModel
+import com.example.githupuser.viewmodel.IsVisibilitySearchBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ListUserActivity : AppCompatActivity() {
@@ -37,6 +38,17 @@ class ListUserActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.navigation_home, R.id.navigation_favorite
         ).build()
+
+        val visibilitySearchBar = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(IsVisibilitySearchBar::class.java)
+
+        visibilitySearchBar.isVisibility.observe(this,{
+            if(it){
+                binding.clSearchContainer.visibility = View.VISIBLE
+            }else{
+                binding.clSearchContainer.visibility = View.GONE
+            }
+        })
+
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

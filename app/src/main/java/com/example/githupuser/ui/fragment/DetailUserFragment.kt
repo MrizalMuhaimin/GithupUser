@@ -28,7 +28,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserFragment : Fragment() {
 
-    private lateinit var viewBinding: FragmentDetailUserBinding
+    private var _viewBinding: FragmentDetailUserBinding ? = null
+    private val viewBinding get() = _viewBinding!!
     private lateinit var mainViewModel : DetailViewModel
     private var userEntity: UserEntity? = null
     private lateinit var mFavoriteAddUpdateViewModel : FavoriteAddUpdateViewModel
@@ -39,7 +40,7 @@ class DetailUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewBinding = FragmentDetailUserBinding.inflate(inflater,container,false)
+        _viewBinding = FragmentDetailUserBinding.inflate(inflater,container,false)
 
         return  viewBinding.root
     }
@@ -116,6 +117,11 @@ class DetailUserFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
+    }
+
     fun renderAllDetai (it: UserDetail, view: View){
         viewBinding.tvNameGithupDetail.text = it.name?: "-"
         viewBinding.tvCompanyGithupDetail.text = it.company?: "-"
@@ -185,7 +191,6 @@ class DetailUserFragment : Fragment() {
             userEntity!!.updated_at,
         )
         renderAllDetai(userDetai,view)
-        viewBinding.tvNameGithupDetail.text = "userEntity!!.name"
 
     }
 
